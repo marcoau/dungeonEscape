@@ -43,6 +43,7 @@ $(document).ready(function(){
   });
 
   //the append action is wrapped within monster constructor
+  //  ***ARBITRARY PARAMETER**
   var monster = new Dirt(1000, 1, 3, map);
 
 

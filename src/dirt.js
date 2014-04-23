@@ -12,6 +12,7 @@ Dirt.prototype.step = function(fps){
 };
 
 Dirt.prototype.action = function(){
+  //  ***ARBITRARY PARAMETER**
   var direction = Math.floor(Math.random() * 6);
   //up, right, down, left respectively
   if(direction === 0){
