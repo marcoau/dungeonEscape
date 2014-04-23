@@ -3,6 +3,7 @@ var Chip = function(left, top, map){
   this.$node = $('<span class="chip"></span>');
   this._pos = [left, top];
   this._map = map;
+  this._lastMovedTime = undefined;
   this.addToTile();
   $('.world').append(this.$node);
   //  ***MAP SIZE SENSITIVE***
@@ -20,15 +21,20 @@ Chip.prototype.renderPos = function(tileSize, left, top){
 };
 
 Chip.prototype.move = function(left, top){
-  this.removeFromTile();
-  this._pos[0] += left;
-  this._pos[1] += top;
-  this.victoryCheck();
-  this.collisionCheck();
-  console.log(this._pos[0], this._pos[1]);
-  this.addToTile();
-  //  ***MAP SIZE SENSITIVE***
-  this.renderPos(50, this._pos[0], this._pos[1]);
+  var time = new Date();
+  //  ***ARBITRARY PARAMETER**
+  if(!this._lastMovedTime || time - this._lastMovedTime > 250){
+    this._lastMovedTime = time;
+    this.removeFromTile();
+    this._pos[0] += left;
+    this._pos[1] += top;
+    this.victoryCheck();
+    this.collisionCheck();
+    console.log(this._pos[0], this._pos[1]);
+    this.addToTile();
+    //  ***MAP SIZE SENSITIVE***
+    this.renderPos(50, this._pos[0], this._pos[1]);
+  }
 };
 
 //add string 'chip' to new tile's ._inside it moves to
